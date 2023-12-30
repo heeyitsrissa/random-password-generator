@@ -15,4 +15,5 @@ screenshot of deployed application: ![Alt text](assets/images/_Users_marissaprat
 
 ## License 
 
-https://img.shields.io/badge/License-MIT
+![Static Badge](https://img.shields.io/badge/License-MIT)
+
