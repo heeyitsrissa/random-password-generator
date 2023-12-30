@@ -6,21 +6,21 @@
 // passwords should be generated on screen
 let passLength;
 
-let passphrase = ``;
-
-const promptsPass = [];
+let promptsPass = [];
 
 const generateBtn = document.querySelector("#generate");
 
-let passChoices = {
-    upperLetter: [`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`, `V`, `W`, `X`, `Y`, `Z`],
-    lowLetter: [`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `m`, `n`, `o`, `p`, `q`, `r`, `s`, `t`, `u`, `v`, `w`, `x`, `y`, `z`],
-    // will i have to convert numbers into strings?
-    number: [`0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`],
-    specialSymbol: [`!`, `@`, `#`, `$`, `%`, `^`, `&`, `*`, `,`, `.`, `?`]
-};
+  const upperLetter = [`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`, `V`, `W`, `X`, `Y`, `Z`];
+
+   const lowLetter = [`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `m`, `n`, `o`, `p`, `q`, `r`, `s`, `t`, `u`, `v`, `w`, `x`, `y`, `z`];
+
+   const number = [`0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`];
+
+   const specialSymbol = [`!`, `@`, `#`, `$`, `%`, `^`, `&`, `*`, `,`, `.`, `?`];
 
 function writePassword() {
+    prompts();
+
     password = generatePassword();
     
     const passwordText = document.querySelector("#password");
@@ -34,8 +34,9 @@ generateBtn.addEventListener("click", writePassword);
 
 
 function prompts() {
-// will i have to convert prompt into an integer for code to work?
-    passLength = prompt (`How Long would you like your password to be?(8-128 characters)`) 
+    promptsPass = [];
+
+    passLength = prompt (`How Long would you like your password to be?(8-128 characters)`)
     
     if(passLength <= 7){
         alert(`you need at least 8 characters`);
@@ -46,31 +47,31 @@ function prompts() {
     } else if (isNaN(passLength)){
         alert (`Must be a number!`);
         prompts();
-    } else {
-        passphrase = passphrase.concat(passLength);
-    }
+    } 
+    
 
     if ( confirm(`Would you like to use upper case letters?`)) {
-     passphrase = passphrase.concat(passChoices.upperLetter);
+     promptsPass = promptsPass.concat(upperLetter);
     }
     if (confirm(`Would you like to add lowercase letters?`)) {
-    passphrase = passphrase.concat(passChoices.lowLetter);
+    promptsPass = promptsPass.concat(lowLetter);
     }
     if (confirm (`Would you like to add numbers?`)){
-    passphrase = passphrase.concat(passChoices.number);
+    promptsPass = promptsPass.concat(number);
     }
     if(confirm(`woulc you like to include special symbols?`)){
-    passphrase = passphrase.concat(passChoices.specialSymbol);
+    promptsPass = promptsPass.concat(specialSymbol);
     }
+   
 }
 
-prompts();
+
 
 function generatePassword(){
     let passphrase = ``;
     for(let i = 0; i < passLength; i++){
-        const index = math.floor(math.random() * passLength);
-        passphrase = passphrase + passChoices[index];
+        const index = Math.floor(Math.random() * promptsPass.length);
+        passphrase = passphrase + promptsPass[index];
     }
     return passphrase;
 }
